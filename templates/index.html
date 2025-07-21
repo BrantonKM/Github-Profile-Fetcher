@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Profile Fetcher</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>GitHub Profile Fetcher</h1>
+
+  <form id="searchForm" method="POST">
+    <input type="text" name="username" id="username" placeholder="Enter GitHub username" required>
+    <button type="submit">Search</button>
+  </form>
+
+  <div id="loader" class="hidden">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+
+  {% if error %}
+    <p style="color:red;">{{ error }}</p>
+  {% endif %}
+
+  {% if profile %}
+    <div id="profile">
+      <img src="{{ profile.avatar_url }}" width="100">
+      <h2>{{ profile.name or profile.login }}</h2>
+      <p>{{ profile.bio or 'No bio available' }}</p>
+      <p>📁 Repos: {{ profile.public_repos }}</p>
+      <p>👥 Followers: {{ profile.followers }}</p>
+      <p>🔁 Following: {{ profile.following }}</p>
+      <a href="{{ profile.html_url }}" target="_blank">View GitHub Profile</a>
+
+      <h3>Top Repositories</h3>
+      <ul class="repo-list">
+        {% for repo in repos %}
+          <li><a href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a> ★ {{ repo.stargazers_count }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
