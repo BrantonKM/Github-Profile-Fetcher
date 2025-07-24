@@ -1,46 +1,77 @@
+<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>GitHub Profile Fetcher</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>GitHub Profile Fetcher</h1>
+  <div class="theme-toggle">
+   <label>
+     <input type="checkbox" id="themeSwitch" />
+     Switch to Dark Mode
+    </label>
+  </div>
+  <!-- Add this near the top of your <body> -->
+  <header class="top-header">
+    <div class="left-buttons">
+      <a href="/admin" class="admin-link">🔧 Admin Panel</a>
+    </div>
+    <div class="right-buttons">
+      <button id="themeToggle">🌗 Toggle Theme</button>
+    </div>
+  </header>
 
-  <form id="searchForm" method="POST">
-    <input type="text" name="username" id="username" placeholder="Enter GitHub username" required>
-    <button type="submit">Search</button>
-  </form>
+  <!-- Matrix Rain Effect Canvas -->
+  <canvas id="matrix"></canvas>
 
-  <div id="loader" class="hidden">
-    <div class="spinner"></div>
-    <p>Loading...</p>
+    <!-- Add this inside the <body> before the main content -->
+  <header class="top-bar">
+    <div class="logo">GitHub Profile Fetcher</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/reports">Admin Panel</a>
+    </nav>
+  </header>
+
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="container">
+      <h1>🔍 GitHub Profile Fetcher</h1>
+      <form id="searchForm" method="POST">
+        <input type="text" name="username" placeholder="Enter GitHub username" required />
+        <button type="submit">Search</button>
+      </form>
+
+      <div id="loading" style="display: none;">Loading...</div>
+
+      {% if user %}
+        <div class="profile">
+          <img src="{{ user.avatar_url }}" alt="{{ user.login }}'s avatar" />
+          <h2>{{ user.name or user.login }}</h2>
+          <p>{{ user.bio or "No bio available." }}</p>
+          <p><strong>Followers:</strong> {{ user.followers }} | <strong>Following:</strong> {{ user.following }}</p>
+          <a href="{{ user.html_url }}" target="_blank">View on GitHub</a>
+        </div>
+
+        <div class="repos">
+          <h3>Top Repositories</h3>
+          <ul>
+            {% for repo in repos %}
+              <li>
+                <a href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a> ⭐ {{ repo.stargazers_count }}
+                <p>{{ repo.description or "No description." }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
   </div>
 
-  {% if error %}
-    <p style="color:red;">{{ error }}</p>
-  {% endif %}
-
-  {% if profile %}
-    <div id="profile">
-      <img src="{{ profile.avatar_url }}" width="100">
-      <h2>{{ profile.name or profile.login }}</h2>
-      <p>{{ profile.bio or 'No bio available' }}</p>
-      <p>📁 Repos: {{ profile.public_repos }}</p>
-      <p>👥 Followers: {{ profile.followers }}</p>
-      <p>🔁 Following: {{ profile.following }}</p>
-      <a href="{{ profile.html_url }}" target="_blank">View GitHub Profile</a>
-
-      <h3>Top Repositories</h3>
-      <ul class="repo-list">
-        {% for repo in repos %}
-          <li><a href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a> ★ {{ repo.stargazers_count }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-
+  <!-- Matrix & App JS -->
   <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>

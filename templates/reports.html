@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search Reports</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">GitHub Profile Fetcher</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/reports">Admin Panel</a>
+    </nav>
+  </header>
+
+  <div class="content">
+    <h1>🔐 Admin Panel - Search Logs</h1>
+    <a href="/reports?download=1" class="btn">📥 Download CSV</a>
+
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Searched At</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for username, searched_at in rows %}
+          <tr>
+            <td>{{ username }}</td>
+            <td>{{ searched_at }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
