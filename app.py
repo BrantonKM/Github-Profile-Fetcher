@@ -76,7 +76,7 @@ def index():
 
 
 # ----------------------------
-# 🔐 Login Routes
+#  Login Routes
 # ----------------------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -97,7 +97,7 @@ def logout():
 
 
 # ----------------------------
-# 📊 Reports Panel (Admin)
+#  Reports Panel (Admin)
 # ----------------------------
 @app.route("/reports")
 def reports():
@@ -132,7 +132,7 @@ def reports():
         logging.error("Error fetching reports: %s", e)
         return "An error occurred", 500
 # ----------------------------
-# 📥 Export to CSV
+#  Export to CSV
 # ----------------------------
 @app.route("/download")
 def download_csv():
