@@ -1,26 +1,26 @@
-# 🔍 GitHub Profile Fetcher (Flask + Docker + PostgreSQL)
+#  GitHub Profile Fetcher (Flask + Docker + PostgreSQL)
 
 A sleek Flask web app that allows users to fetch real-time GitHub profile data and top repositories by simply entering a GitHub username. The app logs each search in a PostgreSQL database and runs inside Docker for easy deployment.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🔎 Search GitHub users by username
-- 📂 Displays user profile, avatar, and top repositories
-- 🧠 Logs all searches to a PostgreSQL database
-- 🐳 Dockerized for full-stack container deployment
-- 🌐 Responsive frontend using HTML/CSS/JS
+-  Search GitHub users by username
+-  Displays user profile, avatar, and top repositories
+-  Logs all searches to a PostgreSQL database
+-  Dockerized for full-stack container deployment
+-  Responsive frontend using HTML/CSS/JS
 
 ---
 
-## 🖼️ Demo Screenshot
+##  Demo Screenshot
 
 ![screenshot](static/screenshot.png)
 
 ---
 
-## 🧱 Tech Stack
+##  Tech Stack
 
 | Layer       | Tech               |
 |-------------|--------------------|
@@ -32,7 +32,7 @@ A sleek Flask web app that allows users to fetch real-time GitHub profile data a
 
 ---
 
-## 🧰 Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone the Repository
 
